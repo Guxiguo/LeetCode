@@ -12,6 +12,28 @@ package FurthestBuilding;
 import java.util.PriorityQueue;
 
 public class Solution {
+    public int furthestBuilding(int[] heights, int bricks, int ladders) {
+        PriorityQueue queue = new PriorityQueue();
+        int ans = 0;
+        while(ans< heights.length-1){
+            if(heights[ans]>=heights[ans+1]){
+                ans++;
+            }
+            else{
+                queue.add(heights[ans+1]-heights[ans]);
+                if(queue.size()>ladders){
+                    bricks = bricks-queue.poll();
+                }
+                if(bricks<0){
+                    return ans;
+                }
+                else{
+                    ans++;
+                }
+            }
+
+        }
+    }
     /**
     public int furthestBuilding(int[] heights, int bricks, int ladders) {
         int count = 0;
