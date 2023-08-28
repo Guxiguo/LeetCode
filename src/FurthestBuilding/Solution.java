@@ -13,26 +13,23 @@ import java.util.PriorityQueue;
 
 public class Solution {
     public int furthestBuilding(int[] heights, int bricks, int ladders) {
-        PriorityQueue queue = new PriorityQueue();
-        int ans = 0;
-        while(ans< heights.length-1){
-            if(heights[ans]>=heights[ans+1]){
-                ans++;
-            }
-            else{
-                queue.add(heights[ans+1]-heights[ans]);
-                if(queue.size()>ladders){
-                    bricks = bricks-queue.poll();
-                }
-                if(bricks<0){
+        PriorityQueue<Integer> queue = new PriorityQueue<>();
+        int ans=0;
+        while(ans<heights.length-1){
+            if(heights[ans]>=heights[ans+1]) ans++;
+            else {
+                int v=heights[ans+1]-heights[ans];
+                queue.add(v);
+                if(queue.size()>ladders) bricks-=queue.poll();
+                if(bricks<0) {
                     return ans;
                 }
                 else{
                     ans++;
                 }
             }
-
         }
+        return ans;
     }
     /**
     public int furthestBuilding(int[] heights, int bricks, int ladders) {
@@ -109,23 +106,5 @@ public class Solution {
         return count;
     }
      **/
-    public int furthestBuilding(int[] heights, int bricks, int ladders) {
-        PriorityQueue<Integer> queue = new PriorityQueue<>();
-        int ans=0;
-        while(ans<heights.length-1){
-            if(heights[ans]>=heights[ans+1]) ans++;
-            else {
-                int v=heights[ans+1]-heights[ans];
-                queue.add(v);
-                if(queue.size()>ladders) bricks-=queue.poll();
-                if(bricks<0) {
-                    return ans;
-                }
-                else{
-                    ans++;
-                }
-            }
-        }
-        return ans;
-    }
+
 }
